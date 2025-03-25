@@ -1,0 +1,220 @@
+/* Register Page Styles */
+.register-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px);
+    background-color: #f8f9fa;
+    padding: 2rem 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .register-container {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .register-container h1 {
+    color: #2e8b57;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    font-size: 2rem;
+  }
+  
+  .register-container p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+  .form-group input,
+  .form-group select {
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group select:focus {
+    outline: none;
+    border-color: #2e8b57;
+    box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+  }
+  
+  .form-group input.error {
+    border-color: #e74c3c;
+  }
+  
+  .error-message {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+  }
+  
+  .user-type-section {
+    margin-bottom: 0.5rem;
+  }
+  
+  .user-type-options {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.8rem;
+  }
+  
+  .user-type-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .user-type-option input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    transition: all 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .user-type-option input[type="radio"]:checked {
+    border-color: #2e8b57;
+    background-color: #2e8b57;
+  }
+  
+  .user-type-option input[type="radio"]:checked::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .user-type-option label {
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .user-type-option input[type="radio"]:checked + label {
+    color: #2e8b57;
+  }
+  
+  .terms-agreement {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .terms-agreement input {
+    margin-top: 0.2rem;
+    min-width: 18px;
+    cursor: pointer;
+  }
+  
+  .terms-agreement a {
+    color: #2e8b57;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  
+  .terms-agreement a:hover {
+    color: #3aa76d;
+    text-decoration: underline;
+  }
+  
+  .register-btn {
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+  
+  .register-btn:hover:not(:disabled) {
+    background-color: #3aa76d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(46, 139, 87, 0.2);
+  }
+  
+  .register-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+  }
+  
+  .login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #666;
+    font-size: 0.95rem;
+  }
+  
+  .login-link a {
+    color: #2e8b57;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  
+  .login-link a:hover {
+    color: #3aa76d;
+    text-decoration: underline;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 480px) {
+    .register-container {
+      padding: 2rem 1.5rem;
+    }
+    
+    .user-type-options {
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    
+    .register-btn:hover:not(:disabled) {
+      transform: none;
+    }
+  }
