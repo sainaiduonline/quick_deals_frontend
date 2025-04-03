@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import './App.css';
+import Deals from './pages/Deals';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/deals" element={<Deals />} />
           </Routes>
         </main>
         <Footer />
