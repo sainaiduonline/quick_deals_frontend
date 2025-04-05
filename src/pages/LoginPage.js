@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './LoginPage.css';
 
 const LoginPage = () => {
@@ -18,23 +19,39 @@ const LoginPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
-    // Basic validation
+
+    // Validation
     if (!credentials.email || !credentials.password) {
       setError('Please fill in all fields');
       return;
     }
-    
-    // Authentication logic would go here (API call, etc.)
-    console.log('Login attempt with:', credentials);
-    
-    // For demo purposes, we'll simulate successful login
-    setTimeout(() => {
-      navigate('/dashboard'); // Redirect to dashboard after login
-    }, 1000);
+
+    try {
+      const response = await axios.post('http://localhost:7001/quick_deals/authenticate/login', {
+        userEmail: credentials.email,
+        Password: credentials.password
+      });
+
+      if (response.data.status === 200) {
+        const { token, results } = response.data;
+
+        // Optional: store token and user info
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('user', JSON.stringify(results));
+
+        // Redirect on success
+        navigate('/dashboard');
+      } else {
+        setError(response.data.message || 'Login failed');
+      }
+    } catch (err) {
+      console.error(err);
+      const msg = err.response?.data?.message || 'Login request failed';
+      setError(msg);
+    }
   };
 
   return (
@@ -42,9 +59,9 @@ const LoginPage = () => {
       <div className="login-container">
         <h1>Welcome Back</h1>
         <p>Login to access your account and find great deals</p>
-        
+
         {error && <div className="error-message">{error}</div>}
-        
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -57,7 +74,7 @@ const LoginPage = () => {
               placeholder="Enter your email" 
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input 
@@ -69,7 +86,7 @@ const LoginPage = () => {
               placeholder="Enter your password" 
             />
           </div>
-          
+
           <div className="remember-forgot">
             <div className="remember-me">
               <input type="checkbox" id="remember" />
@@ -77,14 +94,14 @@ const LoginPage = () => {
             </div>
             <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
           </div>
-          
+
           <button type="submit" className="login-btn">Login</button>
         </form>
-        
+
         <div className="signup-link">
           Don't have an account? <Link to="/register">Sign up</Link>
         </div>
-        
+
         <div className="social-login">
           <p>Or login with</p>
           <div className="social-icons">

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Footer.css';
+import '@fortawesome/fontawesome-free/css/all.min.css'; // Load Font Awesome
 
 const Footer = () => {
   return (
@@ -9,7 +10,9 @@ const Footer = () => {
         <div className="footer-row">
           <div className="footer-col">
             <h3>Quick-Deals</h3>
-            <p>Reducing food waste by connecting businesses with surplus food to consumers looking for great deals.</p>
+            <p>
+              Reducing food waste by connecting businesses with surplus food to consumers looking for great deals.
+            </p>
             <div className="social-links">
               <a href="#" aria-label="Facebook"><i className="fab fa-facebook-f"></i></a>
               <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>

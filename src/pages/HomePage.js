@@ -29,22 +29,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className="deals-section">
-        <h2>Today's Best Deals</h2>
-        {/* This would be populated with actual deals from API */}
-        <div className="deals-grid">
-          <div className="deal-card">
-            <div className="deal-image"></div>
-            <div className="deal-info">
-              <h4>Fresh Bakery Items</h4>
-              <p className="price">$3.99 <span className="original-price">$8.99</span></p>
-              <p className="location">Downtown Bakery • 0.5mi away</p>
-            </div>
-          </div>
-          {/* More deal cards would go here */}
-        </div>
-        <Link to="/deals" className="btn primary">View All Deals</Link>
-      </section>
+      
     </div>
   );
 };
