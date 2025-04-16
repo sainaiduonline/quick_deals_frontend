@@ -1,0 +1,285 @@
+/* Admin Dashboard Base Styles */
+.admin-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8f9fa;
+    color: #333;
+  }
+  
+  .admin-dashboard h1 {
+    text-align: center;
+    color: #2e8b57;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+  }
+  
+  /* Button for opening create modal */
+  .admin-open-modal-btn {
+    background-color: #2e8b57;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .admin-open-modal-btn:hover {
+    background-color: #3aa76d;
+  }
+  
+  /* Message Styles */
+  .admin-error-message,
+  .admin-success-message {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .admin-error-message {
+    color: #e74c3c;
+  }
+  
+  .admin-success-message {
+    color: #2e8b57;
+  }
+  
+  /* Deals List Section */
+  .admin-deals-list {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+  }
+  
+  /* Heading placed at the top of the table */
+  .admin-deals-list h2 {
+    color: #2e8b57;
+    margin-bottom: 0.75rem;
+    text-align: left;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+  
+  /* Deals Table */
+  .admin-deals-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+  }
+  
+  .admin-deals-table th,
+  .admin-deals-table td {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    text-align: center;
+    font-size: 0.95rem;
+  }
+  
+  .admin-deals-table th {
+    background-color: #f1f3f5;
+    color: #2e8b57;
+  }
+  
+  .admin-deals-table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .admin-deals-table img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  /* Action Buttons Container */
+  .admin-action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+  
+  /* Edit and Delete Buttons */
+  .admin-action-buttons button {
+    padding: 0.4rem 0.7rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    line-height: 1;
+  }
+  
+  .admin-edit-btn {
+    background-color: #2e8b57;
+  }
+  
+  .admin-edit-btn:hover {
+    background-color: #3aa76d;
+  }
+  
+  .admin-delete-btn {
+    background-color: #e74c3c;
+  }
+  
+  .admin-delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Form Styles (for Create and Edit forms in modals) */
+  .admin-dashboard form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  }
+  
+  .admin-dashboard form input,
+  .admin-dashboard form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .admin-dashboard form input:focus,
+  .admin-dashboard form textarea:focus {
+    border-color: #2e8b57;
+    outline: none;
+  }
+  
+  .admin-dashboard form textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .admin-dashboard form button {
+    background-color: #2e8b57;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    grid-column: span 2;
+    justify-self: center;
+    margin-top: 1rem;
+  }
+  
+  .admin-dashboard form button:hover {
+    background-color: #3aa76d;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .admin-dashboard form {
+      grid-template-columns: 1fr;
+    }
+    
+    .admin-deals-table, 
+    .admin-deals-table th, 
+    .admin-deals-table td {
+      font-size: 0.85rem;
+    }
+  }
+  
+  /* Modal Styles (Admin-specific) */
+  .admin-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+  
+  .admin-modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .admin-modal-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+   /* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* Optional: Button for opening the create modal */
+  .open-modal-btn {
+    background-color: #2e8b57;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.3s;
+  }
+  
+  .open-modal-btn:hover {
+    background-color: #3aa76d;
+  }

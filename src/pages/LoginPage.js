@@ -38,12 +38,17 @@ const LoginPage = () => {
       if (response.data.status === 200) {
         const { token, results } = response.data;
 
-        // Optional: store token and user info
+        // Store token and user info in localStorage
         localStorage.setItem('authToken', token);
-        localStorage.setItem('user', JSON.stringify(results));
+        localStorage.setItem('user_id', JSON.stringify(results.user_id));
+        localStorage.setItem('role', JSON.stringify(results.role));
 
-        // Redirect on success
-        navigate('/dashboard');
+        // Redirect based on role and user_id
+        if (results.role === 'admin' && results.user_id === 1) {
+          navigate('/dashboard');
+        } else {
+          navigate('/deals');
+        }
       } else {
         setError(response.data.message || 'Login failed');
       }
@@ -92,7 +97,6 @@ const LoginPage = () => {
               <input type="checkbox" id="remember" />
               <label htmlFor="remember">Remember me</label>
             </div>
-            <Link to="/forgot-password" className="forgot-password">Forgot password?</Link>
           </div>
 
           <button type="submit" className="login-btn">Login</button>
@@ -100,14 +104,6 @@ const LoginPage = () => {
 
         <div className="signup-link">
           Don't have an account? <Link to="/register">Sign up</Link>
-        </div>
-
-        <div className="social-login">
-          <p>Or login with</p>
-          <div className="social-icons">
-            <button type="button" className="social-btn google">Google</button>
-            <button type="button" className="social-btn facebook">Facebook</button>
-          </div>
         </div>
       </div>
     </div>

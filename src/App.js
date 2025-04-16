@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import './App.css';
 import Deals from './pages/Deals';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/deals" element={<Deals />} />
+            <Route path="/dashboard" element={<AdminDashboard />} />
           </Routes>
         </main>
         <Footer />
