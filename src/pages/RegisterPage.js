@@ -77,7 +77,7 @@ const RegisterPage = () => {
 
       if (response.status === 201) {
         alert('Account created successfully!');
-        navigate('/dashboard');
+        navigate('/login');
       }
     } catch (error) {
       console.error(error);

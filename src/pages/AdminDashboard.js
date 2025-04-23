@@ -210,11 +210,11 @@ const AdminDashboard = () => {
                 <td>{new Date(deal.expiration_date).toLocaleString()}</td>
                 <td>
                   {deal.image_url ? (
-                    <img 
-                      src={deal.image_url} 
-                      alt={deal.name} 
-                      style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }}
-                    />
+                    <img
+                    src={`http://localhost:7001/${deal.image_url}`}
+                    alt={deal.name}
+                    style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }}
+                  />    
                   ) : (
                     "No Image"
                   )}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Deals.css';
 
+const API_BASE = 'http://localhost:7001';
+
 const Deals = () => {
   const [deals, setDeals] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,69 +15,62 @@ const Deals = () => {
   });
   const navigate = useNavigate();
 
-  // Mock data fetch - replace with actual API call
   useEffect(() => {
     const fetchDeals = async () => {
       try {
         setLoading(true);
-        
-        // Convert filters to query parameters
-        const queryParams = new URLSearchParams();
-        if (filters.category) queryParams.append('category', filters.category);
-        if (filters.priceRange) queryParams.append('priceRange', filters.priceRange);
-        if (filters.distance) queryParams.append('distance', filters.distance);
-        if (filters.condition) queryParams.append('condition', filters.condition);
-        
-        const response = await fetch(`http://localhost:7001/deals?${queryParams.toString()}`);
-        const data = await response.json();
-        
-        if (response.ok) {
-          // Access the 'data' key for deals
-          setDeals(data.data);
+        const params = new URLSearchParams();
+        if (filters.category) params.append('category', filters.category);
+        if (filters.priceRange) params.append('priceRange', filters.priceRange);
+        if (filters.distance) params.append('distance', filters.distance);
+        if (filters.condition) params.append('condition', filters.condition);
+
+        const res = await fetch(`${API_BASE}/deals?${params.toString()}`);
+        const json = await res.json();
+        if (res.ok) {
+          setDeals(json.data);
         } else {
-          console.error('Failed to fetch deals:', data.message);
-          // Optionally show error to user
+          console.error('Failed to fetch deals:', json.message);
         }
-      } catch (error) {
-        console.error('Error fetching deals:', error);
+      } catch (err) {
+        console.error('Error fetching deals:', err);
       } finally {
         setLoading(false);
       }
     };
-  
+
     fetchDeals();
-  }, [filters]); // Re-run when filters change
+  }, [filters]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    setFilters(prev => ({ ...prev, [name]: value }));
+    setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleDealClick = (foodId) => {
     navigate(`/deal/${foodId}`);
   };
 
-  const filteredDeals = Array.isArray(deals) ? deals.filter(deal => {
-    return (
-      (filters.category === '' || deal.category_id === parseInt(filters.category)) &&
-      (filters.condition === '' || deal.condition === filters.condition) &&
-      (filters.priceRange === '' || (
-        filters.priceRange === 'under5' && deal.current_price < 5 ||
-        filters.priceRange === '5to10' && deal.current_price >= 5 && deal.current_price <= 10 ||
-        filters.priceRange === 'over10' && deal.current_price > 10
-      ))
-    );
-  }) : [];
+  const filteredDeals = Array.isArray(deals)
+    ? deals.filter((deal) => {
+        return (
+          (filters.category === '' || deal.category_id === Number(filters.category)) &&
+          (filters.condition === '' || deal.condition === filters.condition) &&
+          (filters.priceRange === '' ||
+            (filters.priceRange === 'under5' && deal.current_price < 5) ||
+            (filters.priceRange === '5to10' &&
+              deal.current_price >= 5 &&
+              deal.current_price <= 10) ||
+            (filters.priceRange === 'over10' && deal.current_price > 10))
+        );
+      })
+    : [];
 
-  const formatTime = (dateString) => {
-    const options = { hour: '2-digit', minute: '2-digit' };
-    return new Date(dateString).toLocaleTimeString([], options);
-  };
+  const formatTime = (dt) =>
+    new Date(dt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-  const formatDate = (dateString) => {
-    const options = { weekday: 'short', month: 'short', day: 'numeric' };
-    return new Date(dateString).toLocaleDateString([], options);
-  };
+  const formatDate = (dt) =>
+    new Date(dt).toLocaleDateString([], { weekday: 'short', month: 'short', day: 'numeric' });
 
   return (
     <div className="deals-page">
@@ -85,9 +80,9 @@ const Deals = () => {
       </div>
 
       <div className="deals-container">
-        <div className="filters-sidebar">
+        <aside className="filters-sidebar">
           <h3>Filters</h3>
-          
+
           <div className="filter-group">
             <label>Category</label>
             <select name="category" value={filters.category} onChange={handleFilterChange}>
@@ -120,23 +115,20 @@ const Deals = () => {
             </select>
           </div>
 
-          <button 
-            className="clear-filters" 
-            onClick={() => setFilters({
-              category: '',
-              priceRange: '',
-              distance: '',
-              condition: ''
-            })}
+          <button
+            className="clear-filters"
+            onClick={() =>
+              setFilters({ category: '', priceRange: '', distance: '', condition: '' })
+            }
           >
             Clear All Filters
           </button>
-        </div>
+        </aside>
 
         <div className="deals-list">
           {loading ? (
             <div className="loading-spinner">
-              <div className="spinner"></div>
+              <div className="spinner" />
               <p>Loading delicious deals...</p>
             </div>
           ) : filteredDeals.length === 0 ? (
@@ -145,29 +137,42 @@ const Deals = () => {
               <p>Try adjusting your filters or check back later for new deals</p>
             </div>
           ) : (
-            filteredDeals.map(deal => (
-              <div key={deal.food_id} className="deal-card" onClick={() => handleDealClick(deal.food_id)}>
-                <div className="deal-image" style={{ backgroundImage: `url(${deal.image_url})` }}>
+            filteredDeals.map((deal) => (
+              <div
+                key={deal.food_id}
+                className="deal-card"
+                onClick={() => handleDealClick(deal.food_id)}
+              >
+                <div
+                  className="deal-image"
+                  style={{
+                    backgroundImage: `url(${API_BASE}/${deal.image_url})`
+                  }}
+                >
                   <span className={`condition-tag ${deal.condition}`}>
                     {deal.condition.replace('_', ' ')}
                   </span>
                   <span className="discount-tag">-{deal.discount_percentage}%</span>
                 </div>
+
                 <div className="deal-info">
                   <h3>{deal.name}</h3>
-                  <p className="retailer">{deal.retailer_id} • {/* Add retailer name logic if needed */}</p>
+                  <p className="retailer">{deal.retailer_id}</p>
                   <div className="price-section">
-                    <span className="current-price">${deal.current_price.toFixed(2)}</span>
-                    <span className="original-price">${deal.original_price.toFixed(2)}</span>
+                    <span className="current-price">
+                      ${deal.current_price.toFixed(2)}
+                    </span>
+                    <span className="original-price">
+                      ${deal.original_price.toFixed(2)}
+                    </span>
                   </div>
                   <div className="deal-meta">
                     <div className="meta-item">
-                      <i className="fas fa-box"></i>
-                      <span>{deal.quantity_available} left</span>
+                      <i className="fas fa-box" /> <span>{deal.quantity_available} left</span>
                     </div>
                     <div className="meta-item">
-                      <i className="fas fa-clock"></i>
-                      <span>Expires on {formatDate(deal.expiration_date)}</span>
+                      <i className="fas fa-clock" />{' '}
+                      <span>Expires {formatDate(deal.expiration_date)}</span>
                     </div>
                   </div>
                   <button className="view-deal-btn">View Deal</button>
