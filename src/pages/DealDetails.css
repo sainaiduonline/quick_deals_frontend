@@ -170,4 +170,50 @@
     color: #2e8b57;
     margin-top: 0.5rem;
   }
+
+  .reviews-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+  }
+  .review {
+    margin-bottom: 1rem;
+  }
+  .review .stars {
+    color: #f5a623;
+  }
+  .review-form {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+  }
+  .review-form label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+  }
+  .review-form select,
+  .review-form textarea {
+    margin-top: .25rem;
+    padding: .5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .review-form button {
+    align-self: flex-start;
+    background: #2e8b57;
+    color: white;
+    border: none;
+    padding: .75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .review-form__success {
+    color: green;
+  }
+  .review-form__error {
+    color: red;
+  }
+  
   
