@@ -283,3 +283,34 @@
   .open-modal-btn:hover {
     background-color: #3aa76d;
   }
+
+  /* “Create New Deal” Button */
+.admin-create-btn {
+  display: inline-block;
+  background-color: #2e8b57;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  margin-bottom: 1.5rem;
+}
+
+.admin-create-btn:hover {
+  background-color: #3aa76d;
+}
+
+.admin-create-btn:active {
+  transform: scale(0.98);
+}
+
+/* Ensure it’s centered within the header or container */
+.admin-dashboard > .admin-create-btn {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}

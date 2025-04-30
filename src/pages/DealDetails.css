@@ -1,0 +1,173 @@
+.deal-details {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  }
+  
+  .deal-details__back {
+    background: none;
+    border: none;
+    color: #2e8b57;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+  
+  .deal-details__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .deal-details__image {
+    flex: 1 1 300px;
+    min-height: 300px;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .deal-details__info {
+    flex: 1 1 400px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .deal-details__title {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+    color: #2e8b57;
+  }
+  
+  .deal-details__tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .deal-details__tag {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #fff;
+  }
+  
+  .condition-fresh       { background-color: #28a745; }
+  .condition-near_expiry { background-color: #ffc107; }
+  .condition-day_old     { background-color: #dc3545; }
+  .discount              { background-color: #007bff; }
+  
+  .deal-details__description {
+    flex-grow: 1;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .deal-details__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .deal-details__current {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .deal-details__original {
+    font-size: 1rem;
+    text-decoration: line-through;
+    color: #999;
+  }
+  
+  .deal-details__meta {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem 1.5rem;
+  }
+  
+  .deal-details__meta li {
+    font-size: 0.95rem;
+  }
+  
+  .deal-details__action {
+    background-color: #2e8b57;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: start;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .deal-details__action:hover {
+    background-color: #3aa76d;
+  }
+  
+  .deal-details__action:active {
+    transform: scale(0.98);
+  }
+  
+  /* Mobile */
+  @media (max-width: 768px) {
+    .deal-details__container {
+      flex-direction: column;
+    }
+  }
+  
+  .deal-details__grab-error {
+    color: #e74c3c;
+    margin-bottom: 0.5rem;
+  }
+  
+  .deal-details__grab-success {
+    color: #2e8b57;
+    margin-bottom: 0.5rem;
+  }
+  
+  .deal-details__action[disabled] {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+
+  .deal-details__action {
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+  }
+  
+  .deal-details__action:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  .deal-details__cart-error,
+  .deal-details__grab-error {
+    color: #e74c3c;
+    margin-top: 0.5rem;
+  }
+  
+  .deal-details__cart-success {
+    color: #2e8b57;
+    margin-top: 0.5rem;
+  }
+  

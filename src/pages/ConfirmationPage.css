@@ -1,0 +1,54 @@
+.confirm-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+    text-align: center;
+  }
+  
+  .confirm-page h1 {
+    color: #2e8b57;
+    margin-bottom: 0.5rem;
+  }
+  
+  .confirm-page p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .confirm-items {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    text-align: left;
+  }
+  
+  .confirm-items li {
+    background: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .confirm-back-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    color: #2e8b57;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  
+  .confirm-back-btn:hover {
+    color: #3aa76d;
+  }
+  
+  .confirm-error {
+    color: #e74c3c;
+    margin-top: 2rem;
+  }
+  

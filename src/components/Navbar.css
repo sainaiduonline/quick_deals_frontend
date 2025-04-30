@@ -211,3 +211,33 @@
     text-align: center;
   }
 }
+
+/* Cart link positioning & badge */
+.cart-link {
+  position: relative;
+  margin-left: 1.5rem;
+}
+.cart-link a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: #e74c3c;
+  color: white;
+  border-radius: 50%;
+  padding: 0 5px;
+  font-size: 0.7rem;
+  line-height: 1;
+}
+
+/* Ensure mobile shows cart link properly */
+@media (max-width: 768px) {
+  .cart-link {
+    margin: 1rem 0;
+  }
+}

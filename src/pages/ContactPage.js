@@ -1,27 +1,40 @@
+// src/pages/ContactPage.jsx
 import React, { useState } from 'react';
+import axios from 'axios';
 import './ContactPage.css';
 
-const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+const API_BASE = 'http://localhost:7001';
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+export default function ContactPage() {
+  const [formData, setFormData] = useState({ name:'', email:'', message:'' });
+  const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState('');
+  const [success, setSuccess]   = useState('');
+
+  const handleChange = e => {
+    setFormData(f => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    // Form submission logic would go here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+    setError('');
+    setSuccess('');
+    setLoading(true);
+
+    try {
+      const res = await axios.post(`${API_BASE}/contact`, formData);
+      if (res.status === 201) {
+        setSuccess('Thank you! We’ll be in touch soon.');
+        setFormData({ name:'', email:'', message:'' });
+      } else {
+        setError(res.data.message || 'Something went wrong.');
+      }
+    } catch (err) {
+      console.error(err);
+      setError(err.response?.data?.message || 'Network error. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -35,7 +48,6 @@ const ContactPage = () => {
           <p><strong>Email:</strong> contact@quick-deals.com</p>
           <p><strong>Phone:</strong> (555) 123-4567</p>
           <p><strong>Address:</strong> 123 Green Street, Eco City, EC 12345</p>
-
           <div className="social-links">
             <h3>Follow Us</h3>
             <div className="social-icons">
@@ -48,12 +60,13 @@ const ContactPage = () => {
         </div>
 
         <form className="contact-form" onSubmit={handleSubmit}>
+          {error   && <div className="error-message">{error}</div>}
+          {success && <div className="success-message">{success}</div>}
+
           <div className="form-group">
             <label htmlFor="name">Name</label>
             <input
-              type="text"
-              id="name"
-              name="name"
+              id="name" name="name" type="text"
               value={formData.name}
               onChange={handleChange}
               required
@@ -63,9 +76,7 @@ const ContactPage = () => {
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
-              type="email"
-              id="email"
-              name="email"
+              id="email" name="email" type="email"
               value={formData.email}
               onChange={handleChange}
               required
@@ -75,19 +86,22 @@ const ContactPage = () => {
           <div className="form-group">
             <label htmlFor="message">Message</label>
             <textarea
-              id="message"
-              name="message"
+              id="message" name="message" rows={5}
               value={formData.message}
               onChange={handleChange}
               required
-            ></textarea>
+            />
           </div>
 
-          <button type="submit" className="submit-btn">Send Message</button>
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={loading}
+          >
+            {loading ? 'Sending…' : 'Send Message'}
+          </button>
         </form>
       </div>
     </div>
   );
-};
-
-export default ContactPage;
+}
